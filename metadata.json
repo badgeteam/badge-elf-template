@@ -1,0 +1,10 @@
+{
+    "name": "Template",
+    "description": "BadgeELF template applet",
+    "categories": [],
+    "version": "0.0.1",
+    "author": "RobotMan2412",
+    "license_type": "CC0",
+    "interpreter": "BadgeELF",
+    "main": "main.elf"
+}
