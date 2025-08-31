@@ -9,7 +9,7 @@ makeflags += -j$(shell nproc) --no-print-directory --silent
 
 .PHONY: build
 build:
-	source $(IDF_PATH)/export.sh && \
+	source ./.env && \
 		cmake -B build && \
 		cmake --build build
 

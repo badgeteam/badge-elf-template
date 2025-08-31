@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: CC0
 // SPDX-CopyRightText: 2025 Julian Scheffers
 
@@ -7,18 +6,7 @@
 #include <sys/unistd.h>
 #include "asp/display.h"
 #include "asp/input.h"
-#include "asp/input_types.h"
-#include "pax_fonts.h"
 #include "pax_gfx.h"
-#include "pax_text.h"
-#include "pthread.h"
-
-void* mythreadfunc(void* arg) {
-    (void)arg;
-    usleep(500000);
-    printf("This message printed from a separate thread.\n");
-    return NULL;
-}
 
 int main(int argc, char** argv) {
     printf("Hello, World!\n");
@@ -34,9 +22,6 @@ int main(int argc, char** argv) {
 
     asp_disp_write_pax(gfx);
 
-    pthread_t mythread;
-    pthread_create(&mythread, NULL, mythreadfunc, NULL);
-
     while (1) {
         asp_input_event_t event;
         asp_input_poll(&event, INT64_MAX);
@@ -46,6 +31,5 @@ int main(int argc, char** argv) {
         }
     }
 
-    pthread_join(mythread, NULL);
     return 0;
 }

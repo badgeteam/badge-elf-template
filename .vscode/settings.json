@@ -1,9 +1,6 @@
 {
-    "clangd.fallbackFlags": [
-        "-Wunknown-warning-option"
-    ],
     "clangd.arguments": [
-        "--query-driver=/**/riscv32-esp-elf/bin/riscv32-esp-elf-gcc",
-        "--compile-commands-dir=build"
+        "--compile-commands-dir=build",
+        "--query-driver=/**/riscv32-esp-elf/bin/riscv32-esp-elf-cc"
     ]
 }
