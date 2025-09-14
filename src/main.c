@@ -15,10 +15,10 @@ int main(int argc, char** argv) {
     asp_disp_get_pax_buf(&gfx);
     pax_background(gfx, 0xffff3f3f);
 
-    char const* const msg  = "Hello, World!";
-    pax_vec2f         dims = pax_text_size(pax_font_saira_condensed, pax_font_saira_condensed->default_size, msg);
-    pax_draw_text(gfx, 0xffffffff, pax_font_saira_condensed, pax_font_saira_condensed->default_size,
-                  (pax_buf_get_widthf(gfx) - dims.x) / 2, (pax_buf_get_heightf(gfx) - dims.y) / 2, msg);
+    char const* const msg = "Hello, World!";
+    pax_draw_text_adv(gfx, 0xffffffff, pax_font_saira_condensed, pax_font_saira_condensed->default_size,
+                      pax_buf_get_widthf(gfx) / 2, pax_buf_get_heightf(gfx) / 2, msg, strlen(msg), PAX_ALIGN_CENTER,
+                      PAX_ALIGN_CENTER, -1);
 
     asp_disp_write_pax(gfx);
 
