@@ -1,10 +1,26 @@
 {
-    "name": "Template",
-    "description": "BadgeELF template applet",
-    "categories": [],
+    "name": "BadgeELF template",
+    "description": "Template application",
+    "categories": [
+        "demo"
+    ],
     "version": "0.0.1",
-    "author": "RobotMan2412",
-    "license_type": "CC0",
-    "interpreter": "BadgeELF",
-    "main": "main.elf"
+    "icon": {
+        "16x16": "icon16.png",
+        "32x32": "icon32.png",
+        "64x64": "icon64.png"
+    },
+    "author": "Julian Scheffers",
+    "license_type": "CC0-1.0",
+    "application": [
+        {
+            "targets": [
+                "tanmatsu"
+            ],
+            "revision": 1,
+            "type": "elf",
+            "executable": "main.elf",
+            "assets": []
+        }
+    ]
 }
