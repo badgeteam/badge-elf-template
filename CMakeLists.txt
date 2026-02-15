@@ -10,6 +10,7 @@ include(sdk/CMakeLists.txt)
 
 project(badge_elf_app C)
 
-add_library(main SHARED
+add_executable(main
     src/main.c
 )
+install(TARGETS main DESTINATION .)

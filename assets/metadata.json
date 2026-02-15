@@ -15,11 +15,12 @@
     "application": [
         {
             "targets": [
-                "tanmatsu"
+                "tanmatsu",
+                "konsool"
             ],
             "revision": 1,
             "type": "elf",
-            "executable": "main.elf",
+            "executable": "main",
             "assets": []
         }
     ]

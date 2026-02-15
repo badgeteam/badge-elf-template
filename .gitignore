@@ -1,5 +1,8 @@
 .idea
-.env
 .cache
+.IDF_PATH
+.IDF_TOOLS_PATH
+.BADGELINK
 build
+output
 __pycache__
