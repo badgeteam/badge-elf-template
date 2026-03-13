@@ -13,4 +13,3 @@ project(badge_elf_app C)
 add_executable(main
     src/main.c
 )
-install(TARGETS main DESTINATION .)

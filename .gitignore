@@ -6,3 +6,6 @@
 build
 output
 __pycache__
+badgelink
+esp-idf
+esp-idf-tools
