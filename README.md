@@ -19,5 +19,6 @@ This repository contains the official SDK and a template for the ELF-based apple
     - Press `Y` if when asked if you want to continue.
 3. Download this template in your Ubuntu environment: `git clone https://github.com/badgeteam/badge-elf-template`
 4. Install the SDK: `make prepare`
-5. You can now build the template: `make`
+5. Install the badgelink upload tool: `make badgelink`
+6. You can now build the template: `make`
     - And upload with `make install`
