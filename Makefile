@@ -1,23 +1,39 @@
-IDF_PATH ?= $(shell cat .IDF_PATH 2>/dev/null || echo `pwd`/esp-idf)
-IDF_TOOLS_PATH ?= $(shell cat .IDF_TOOLS_PATH 2>/dev/null || echo `pwd`/esp-idf-tools)
+# IDF_PATH ?= $(shell cat .IDF_PATH 2>/dev/null || echo `pwd`/esp-idf)
+# IDF_TOOLS_PATH ?= $(shell cat .IDF_TOOLS_PATH 2>/dev/null || echo `pwd`/esp-idf-tools)
 BADGELINK ?= $(shell cat .BADGELINK 2>/dev/null || echo `pwd`/badgelink/tools/badgelink.sh)
-IDF_GITHUB_ASSETS ?= dl.espressif.com/github_assets
+# IDF_GITHUB_ASSETS ?= dl.espressif.com/github_assets
 IDF_BRANCH ?= v5.5.1
+TOOLCHAIN ?= $(shell cat .TOOLCHAIN 2>/dev/null || echo `pwd`/toolchain)
 
 INSTALL_DIR ?= /int/apps/team.badge.elftemplate
 
 MAKEFLAGS += -j$(shell nproc) --no-print-directory --silent
 
-export IDF_TOOLS_PATH
-export IDF_GITHUB_ASSETS
+# export IDF_TOOLS_PATH
+# export IDF_GITHUB_ASSET
+
+export PATH = $(shell echo $$PATH):$(TOOLCHAIN)/bin
 
 .PHONY: build
 build:
-	mkdir -p output
-	IDF_TOOLS_PATH='$(IDF_TOOLS_PATH)' source $(IDF_PATH)/export.sh && \
-		cmake -B build && \
-		cmake --build build && \
-		cmake --install build --prefix output
+	mkdir -p output/app
+	cmake -B build/app \
+		-DCMAKE_C_COMPILER=$(TOOLCHAIN)/bin/riscv32-esp-elf-gcc \
+		-DCMAKE_CXX_COMPILER=$(TOOLCHAIN)/bin/riscv32-esp-elf-g++ \
+		-DCMAKE_ASM_COMPILER=$(TOOLCHAIN)/bin/riscv32-esp-elf-ccc
+	cmake --build build/app
+	cmake --install build/app --prefix output/app
+
+.PHONY: build-emulator
+build-emulator:
+	mkdir -p output/emulator
+	cmake -B build/emulator \
+		-DEMULATOR_BUILD=ON
+	cmake --build build/emulator
+	cmake --install build/emulator --prefix output/emulator
+
+.PHONY: emulator
+emulator: build-emulator
 
 .PHONY: clean
 clean:
@@ -31,7 +47,7 @@ install: build
 	$(BADGELINK) fs upload $(INSTALL_DIR)/icon32.png assets/icon32.png
 	$(BADGELINK) fs upload $(INSTALL_DIR)/icon64.png assets/icon64.png
 	$(BADGELINK) fs upload $(INSTALL_DIR)/metadata.json assets/metadata.json
-	$(BADGELINK) fs upload $(INSTALL_DIR)/main build/main
+	$(BADGELINK) fs upload $(INSTALL_DIR)/main output/app/main
 
 .PHONY: badgelink
 badgelink:

@@ -1,6 +1,6 @@
 {
     "clangd.arguments": [
-        "--compile-commands-dir=build",
-        "--query-driver=/**/riscv32-esp-elf/bin/riscv32-esp-elf-cc"
+        "--compile-commands-dir=build/app",
+        "--query-driver=toolchain/bin/riscv32-esp-elf-cc"
     ]
 }
