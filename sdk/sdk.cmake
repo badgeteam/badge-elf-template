@@ -13,7 +13,13 @@ if(EMULATOR_BUILD)
         sdk/emulator/device.c
         sdk/emulator/display.c
         sdk/emulator/err.c
+        sdk/emulator/file.c
+        sdk/emulator/http.c
         sdk/emulator/input.c
+        sdk/emulator/led.c
+        sdk/emulator/log.c
+        sdk/emulator/orientation.c
+        sdk/emulator/power.c
     )
     target_include_directories(badge PUBLIC sdk/include)
     target_link_libraries(badge PUBLIC pax_gfx)
