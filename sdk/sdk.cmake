@@ -38,7 +38,7 @@ if(EMULATOR_BUILD)
     target_link_libraries(badge PRIVATE -lSDL3)
     install(TARGETS badge pax_gfx pax_codecs DESTINATION lib)
 
-    link_libraries(-lpthread -lm badge pax_gfx)
+    link_libraries(-lpthread -lm badge pax_gfx pax_codecs)
 else()
     add_compile_options(-march=rv32imafc_zicsr_zifencei -mabi=ilp32f -fPIC -mno-relax)
 
