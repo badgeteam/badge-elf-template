@@ -28,13 +28,14 @@ build:
 build-emulator:
 	mkdir -p output/emulator
 	cmake -B build/emulator \
-		-DEMULATOR_BUILD=ON
+		-DEMULATOR_BUILD=ON \
+		-DCMAKE_INSTALL_PREFIX=$(CURDIR)/output/emulator
 	cmake --build build/emulator
 	cmake --install build/emulator --prefix output/emulator
 
 .PHONY: emulator
 emulator: build-emulator
-	LD_LIBRARY_PATH=output/emulator ./output/emulator/main
+	LD_LIBRARY_PATH=output/emulator/lib ./output/emulator/main
 
 .PHONY: emulator
 gdb-emulator: build-emulator

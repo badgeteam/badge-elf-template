@@ -4,7 +4,18 @@
 
 if(EMULATOR_BUILD)
     add_compile_options(-g)
+    
     add_subdirectory(sdk/pax-gfx)
+    
+    # Need to inform codecs how to get zlib.
+    add_library(z INTERFACE)
+    add_subdirectory(sdk/pax-codecs/zlib)
+    target_link_libraries(z INTERFACE zlib)
+    # Alias that explicitly exists for the old, broken (but still in use) codecs.
+    add_library(pax_graphics INTERFACE)
+    target_link_libraries(pax_graphics INTERFACE pax_gfx)
+    # Aforementioned PNG codec.
+    add_subdirectory(sdk/pax-codecs)
 
     add_library(badge SHARED
         sdk/emulator/src/audio.c
@@ -24,7 +35,7 @@ if(EMULATOR_BUILD)
     target_include_directories(badge PUBLIC sdk/include)
     target_link_libraries(badge PUBLIC pax_gfx)
     target_link_libraries(badge PRIVATE -lSDL3)
-    install(TARGETS badge pax_gfx DESTINATION .)
+    install(TARGETS badge pax_gfx pax_codecs DESTINATION lib)
 
     link_libraries(-lpthread -lm badge pax_gfx)
 else()
@@ -32,5 +43,9 @@ else()
 
     add_link_options(-nostartfiles -Wl,-emain)
     link_libraries(-L${CMAKE_CURRENT_LIST_DIR}/lib -lbadge -lc -lpthread -lgcc -lm -lpax-gfx -lpax-codecs)
-    include_directories(sdk/include sdk/pax-gfx/core/include)
+    include_directories(
+        sdk/include
+        sdk/pax-gfx/core/include
+        sdk/pax-codecs/include
+    )
 endif()
