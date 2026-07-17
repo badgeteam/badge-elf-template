@@ -183,7 +183,20 @@ static bool pop_event(asp_input_event_t* ev) {
 
 // Convert SDL modifier keys to ASP modifier keys.
 static uint32_t asp_modkeys_from_sdl_modkeys(SDL_Keymod modkeys) {
-    return 0;
+    uint32_t res = 0;
+    if (modkeys & SDL_KMOD_LCTRL) res |= ASP_INPUT_MODIFIER_CTRL_L;
+    if (modkeys & SDL_KMOD_RCTRL) res |= ASP_INPUT_MODIFIER_CTRL_R;
+    if (modkeys & SDL_KMOD_LSHIFT) res |= ASP_INPUT_MODIFIER_SHIFT_L;
+    if (modkeys & SDL_KMOD_RSHIFT) res |= ASP_INPUT_MODIFIER_SHIFT_R;
+    if (modkeys & SDL_KMOD_LALT) res |= ASP_INPUT_MODIFIER_ALT_L;
+    if (modkeys & SDL_KMOD_RALT) res |= ASP_INPUT_MODIFIER_ALT_R;
+    if (modkeys & SDL_KMOD_LGUI) res |= ASP_INPUT_MODIFIER_SUPER_L;
+    if (modkeys & SDL_KMOD_RGUI) res |= ASP_INPUT_MODIFIER_SUPER_R;
+    // if (modkeys & SDL_KMOD_NUM) ; // No num lock in ASP.
+    if (modkeys & SDL_KMOD_CAPS) res |= ASP_INPUT_MODIFIER_CAPSLOCK;
+    // if (modkeys & SDL_KMOD_SCROLL) ; // No scroll lock in ASP.
+    if (modkeys & SDL_KMOD_MODE) res |= ASP_INPUT_MODIFIER_ALT_R;  // Alias.
+    return res;
 }
 
 // Convert SDL key up/down event to ASP input event.
