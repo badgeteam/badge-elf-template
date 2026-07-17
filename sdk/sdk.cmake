@@ -4,6 +4,7 @@
 
 if(EMULATOR_BUILD)
     add_compile_options(-g)
+    add_definitions(-DEMULATOR_BUILD=1)
     
     add_subdirectory(sdk/pax-gfx)
     
