@@ -12,9 +12,6 @@ project(badge_elf_app C CXX)
 # This sets up the SDK for the app and the emulator; it is required.
 include(sdk/sdk.cmake)
 
-# PAX graphics is optional; remove these two lines if you don't want to use it.
-link_libraries(pax-gfx)
-
 add_executable(main
     src/main.c
 )

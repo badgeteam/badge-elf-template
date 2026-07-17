@@ -34,6 +34,11 @@ build-emulator:
 
 .PHONY: emulator
 emulator: build-emulator
+	LD_LIBRARY_PATH=output/emulator ./output/emulator/main
+
+.PHONY: emulator
+gdb-emulator: build-emulator
+	LD_LIBRARY_PATH=output/emulator gdb ./output/emulator/main
 
 .PHONY: clean
 clean:

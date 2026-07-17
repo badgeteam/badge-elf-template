@@ -230,9 +230,9 @@ typedef struct {
 } asp_input_event_args_navigation_t;
 
 typedef struct {
-    char        ascii;
-    char const* utf8;
-    uint32_t    modifiers;
+    char     ascii;
+    char     utf8[7];
+    uint32_t modifiers;
 } asp_input_event_args_keyboard_t;
 
 typedef struct {

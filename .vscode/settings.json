@@ -1,6 +1,10 @@
 {
-    "clangd.arguments": [
+    "_clangd.arguments": [
         "--compile-commands-dir=build/app",
         "--query-driver=toolchain/bin/riscv32-esp-elf-cc"
-    ]
+    ],
+    "clangd.arguments": [
+        "--compile-commands-dir=build/emulator"
+    ],
+    "editor.formatOnSave": true
 }
