@@ -42,7 +42,7 @@ if(EMULATOR_BUILD)
 else()
     add_compile_options(-march=rv32imafc_zicsr_zifencei -mabi=ilp32f -fPIC -mno-relax)
 
-    add_link_options(-nostartfiles -Wl,-emain -shared)
+    add_link_options(-nostartfiles -Wl,-emain -shared -nodefaultlibs)
     link_libraries(-L${CMAKE_CURRENT_LIST_DIR}/lib -lbadge -lc -lpthread -lgcc -lm -lpax-gfx -lpax-codecs)
     include_directories(
         sdk/include
