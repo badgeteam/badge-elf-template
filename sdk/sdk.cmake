@@ -31,6 +31,7 @@ if(EMULATOR_BUILD)
         sdk/emulator/src/log.c
         sdk/emulator/src/orientation.c
         sdk/emulator/src/power.c
+        sdk/emulator/src/pax_log_compat.c
     )
     target_include_directories(badge PRIVATE sdk/emulator/include)
     target_include_directories(badge PUBLIC sdk/include)
@@ -38,7 +39,10 @@ if(EMULATOR_BUILD)
     target_link_libraries(badge PRIVATE -lSDL3)
     install(TARGETS badge pax_gfx pax_codecs DESTINATION lib)
 
-    link_libraries(-lpthread -lm badge pax_gfx pax_codecs)
+    # `z` (zlib) is needed last: pax-codecs' own standalone.cmake fails to link it
+    # (its `target_link_libraries(${TARGET} z)` references an unset ${TARGET}), so
+    # pax_codecs.a never gets zlib attached and it must be supplied here instead.
+    link_libraries(-lpthread -lm badge pax_gfx pax_codecs z)
 else()
     add_compile_options(-march=rv32imafc_zicsr_zifencei -mabi=ilp32f -fPIC -mno-relax)
 
