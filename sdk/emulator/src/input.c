@@ -223,7 +223,7 @@ static void asp_event_from_sdl_key(const SDL_KeyboardEvent* sdl_event, bool new_
             .type = ASP_INPUT_EVENT_TYPE_SCANCODE,
             .args_scancode =
                 (asp_input_event_args_scancode_t){
-                    .scancode = km.scan,
+                    .scancode = new_state ? km.scan : (km.scan | ASP_INPUT_SCANCODE_RELEASE_MODIFIER),
                 },
         };
         push_event(&ev);
